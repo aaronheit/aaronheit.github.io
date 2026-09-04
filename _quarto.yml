@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Aaron Heit"
+  description: "Minnesota science assessment and education data analysis."
+  open-graph: true
+  navbar:
+    pinned: true
+    left:
+      - href: index.qmd
+        text: Home
+      - href: projects.qmd
+        text: Projects
+      - href: about.qmd
+        text: About
+    right:
+      - icon: linkedin
+        href: https://www.linkedin.com/in/aaron-heit-4038123b/
+        aria-label: LinkedIn
+      - icon: github
+        href: https://github.com/aaronheit
+        aria-label: GitHub
+      - icon: bar-chart-fill
+        href: https://public.tableau.com/app/profile/aaron.heit
+        aria-label: Tableau Public
+  page-footer:
+    left: |
+      Independent analysis. Not affiliated with or endorsed by the Minnesota
+      Department of Education or the Anoka-Hennepin School District. All work
+      uses publicly available aggregate data and contains no student-level records.
+    right: "Updated September 2026"
+
+format:
+  html:
+    theme: [default, custom.scss]
+    toc: false
+    page-layout: article
+    anchor-sections: false
+    link-external-newwindow: true
+    link-external-icon: false
+    code-copy: true
+    code-overflow: wrap
+    highlight-style: github
+    email-obfuscation: references
+
+execute:
+  enabled: false
+  echo: true

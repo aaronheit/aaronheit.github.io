@@ -1,0 +1,114 @@
+---
+title: "Projects"
+---
+
+::: {.standfirst}
+Two analyses of Minnesota public education data. Both use publicly available aggregate files and contain no student-level records.
+:::
+
+## Beyond Proficient
+
+::: {.meta}
+Science MCA-IV, spring 2025. Grades 5, 8, and high school. 833 elementary schools statewide.
+:::
+
+Spring 2025 was the first administration of Science MCA-IV, aligned to Minnesota's 2019 science standards. It replaced MCA-III, and results from the two series are not comparable, so this is a cross-sectional analysis rather than a trend.
+
+The starting question was whether school-to-school differences in science proficiency reflect differences in instruction. Working the numbers suggested they mostly reflect the geometry of the scale.
+
+Nine of 833 Minnesota elementary schools have a grade 5 average at or above the proficiency cut of 550. The middle 80% of schools fall between 531.6 and 545.9, a fourteen-point band on a scale that runs 501 to 599. Median within-school standard deviation is 10.9, so the spread inside a typical school is comparable to the spread across nearly the entire state.
+
+Because the cut sits just above almost every school's mean, and because the Intermediate band is only ten points wide, small differences in average performance become large differences in reported proficiency. A normal model using each school's mean and standard deviation predicts its reported proficiency rate at r = 0.965, median absolute residual 0.036.
+
+The more useful view is the distribution. Statewide, the median elementary school has 33% of its fifth graders in the Intermediate band, within ten scale points of proficient. Sorting schools by that share instead of by proficiency inverts the usual ranking and produces a list of buildings with the largest reachable group of students.
+
+A fourth panel uses MDE's participation columns, which break out parent refusals and student refusals separately by school. Refusal is overwhelmingly a parent decision in elementary school and shifts toward a student decision by high school: parent refusals grow roughly fourfold from grade 5 to high school while student refusals grow twentyfold, from 48 to 1,000. Forty-six percent of Minnesota high schools fall below the federal 95% participation threshold in science.
+
+```{=html}
+<iframe class="viz viz-tall" title="Beyond Proficient dashboard" loading="lazy"
+  src="https://public.tableau.com/views/BeyondProficient2025MCAdataproficienciesandopt-outs/BeyondProficient?:showVizHome=no&:embed=true&:toolbar=no&:device=desktop"></iframe>
+```
+
+::: {.viz-note}
+[Open full size on Tableau Public](https://public.tableau.com/app/profile/aaron.heit/viz/BeyondProficient2025MCAdataproficienciesandopt-outs/BeyondProficient)
+:::
+
+::: {.detail}
+Source
+: MDE Assessment Files, All Standards-Based (MCA/MTAS/ALTMCA), Science, Public, 2025. School-level records, all students.
+
+Cut scores
+: MDE, Science Performance Level Cut Scores and Score Ranges, September 2025.
+
+Method
+: Python and pandas for transformation and the distributional model; Tableau for the published views.
+
+Suppression
+: MDE suppresses results below 10 tested students. 578 of 2,402 school records are suppressed and are excluded and counted rather than silently dropped.
+:::
+
+### The part that mattered
+
+The transform derives the cut-score geometry each panel depends on: distance from the mean to the cut in scale points and in standard deviations, the normal-model estimate of the proficient share, and the residual against what MDE actually reported. The residual is the check on whether the argument holds.
+
+```python
+MEETS_CUT = {"5": 550, "8": 850, "HS": 1050}
+
+df["meets_cut"]     = df["grade"].map(MEETS_CUT)
+df["points_to_cut"] = df["meets_cut"] - df["mca_mean"]
+
+df["z_to_cut"] = np.where(df["mca_sd"] > 0,
+                          df["points_to_cut"] / df["mca_sd"], np.nan)
+
+df["est_pct_above_cut"] = np.where(df["z_to_cut"].notna(),
+                                   1 - norm.cdf(df["z_to_cut"]), np.nan)
+
+# The check: how far the model sits from what MDE actually published.
+df["model_residual"] = df["pct_proficient"] - df["est_pct_above_cut"]
+```
+
+Participation needed a constructed denominator, since MDE publishes the component counts but not a school-level rate. It is labeled as derived everywhere it appears, because it is not MDE's official participation measure.
+
+```python
+refuse = ["n_refused_parent", "n_refused_student"]
+miss   = ["n_absent", "n_not_attempted", "n_medical_exempt"]
+inval  = ["n_invalid_behavior", "n_invalid_device", "n_invalid_other",
+          "n_not_complete", "n_ext_attempted", "n_ext_not_attempted"]
+
+df["n_nonparticipant"] = df[refuse + miss + inval].sum(axis=1, min_count=1)
+
+denom = df["total_tested"].fillna(0) + df["n_nonparticipant"].fillna(0)
+df["pct_participation"] = df["total_tested"] / denom.replace(0, np.nan)
+```
+
+[Full transform script on GitHub](https://github.com/aaronheit){.view}
+
+## Minnesota Early Learning Scholarships
+
+::: {.meta}
+County-level awards across five fiscal years.
+:::
+
+Minnesota publishes Early Learning Scholarship award data by county but does not publish the rate at which awarded scholarships go unused. Deriving that unselected-award rate, along with a per-county baseline index, made visible which counties are most exposed to the funding contraction that follows a large one-time appropriation.
+
+The pipeline reconciles five fiscal years of differently structured files into a single tidy table before any of it reaches the visualization layer. Getting the fiscal year filter right turned out to be the whole analysis: an early version summed all five years instead of isolating FY2024, which inflated every county rate and would have made the policy claim wrong.
+
+```{=html}
+<iframe class="viz viz-short" title="Minnesota Early Learning Scholarships dashboard" loading="lazy"
+  src="https://public.tableau.com/views/MinnesotaEarlyLearningScholarshipsCountyAccessOverview/Dashboard2?:showVizHome=no&:embed=true&:toolbar=no&:device=desktop"></iframe>
+```
+
+::: {.viz-note}
+[Open full size on Tableau Public](https://public.tableau.com/app/profile/aaron.heit/viz/MinnesotaEarlyLearningScholarshipsCountyAccessOverview/Dashboard2)
+:::
+
+::: {.detail}
+Source
+: Minnesota Department of Education Early Learning Scholarship award files, county level, five fiscal years.
+
+Method
+: Python and pandas for extraction and reconciliation; Tableau for the published views.
+
+Notes
+: The unselected-award rate and baseline index are derived measures not published by the state, and are labeled as derived. Fiscal year basis is stated on every view.
+:::

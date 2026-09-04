@@ -1,0 +1,78 @@
+---
+title: "Aaron Heit"
+---
+
+::: {.standfirst}
+Middle school science teacher in Anoka-Hennepin. I write science items for the Minnesota Comprehensive Assessments, and I analyze what the resulting data can and cannot tell us.
+:::
+
+::: {.contact-row}
+[Email](mailto:YOUR-EMAIL-HERE) [LinkedIn](https://www.linkedin.com/in/aaron-heit-4038123b/) [Tableau Public](https://public.tableau.com/app/profile/aaron.heit) [GitHub](https://github.com/aaronheit)
+:::
+
+::: {.scale}
+
+::: {.scale-caption}
+The grade 5 Minnesota science scale runs from 501 to 599. Proficiency begins at 550. The band immediately below it is ten points wide.
+:::
+
+```{=html}
+<div class="bands" role="img" aria-label="The grade 5 science scale from 501 to 599, divided into four performance bands: Beginning 501 to 539, Intermediate 540 to 549, Meets 550 to 560, and Advanced 561 to 599. The proficiency cut falls at 550.">
+  <div class="band b-beg"><span>Beginning</span></div>
+  <div class="band b-int"><span>Intermediate</span></div>
+  <div class="cut"><span>550</span></div>
+  <div class="band b-meet"><span>Meets</span></div>
+  <div class="band b-adv"><span>Advanced</span></div>
+</div>
+<div class="scale-ends"><span>501</span><span>599</span></div>
+```
+
+::: {.finding}
+A third of Minnesota fifth graders score inside that ten-point band. Nine of 833 elementary schools have an average that clears the cut at all.
+:::
+
+:::
+
+## Work
+
+::: {.project}
+::: {.spine}
+:::
+::: {}
+### Beyond Proficient
+
+::: {.meta}
+Science MCA-IV, spring 2025. Grades 5, 8, and high school.
+:::
+
+Minnesota reports school science performance as a percent proficient. That number turns out to be a near-deterministic function of two things the state also publishes: a school's average scale score and its standard deviation. A model using only those two inputs predicts the reported proficiency rate at r = 0.965.
+
+Which means proficiency rates exaggerate real differences. Two schools nine scale points apart report 17% and 43%.
+
+[See the analysis and dashboard](projects.qmd){.view}
+:::
+:::
+
+::: {.project}
+::: {.spine-alt}
+:::
+::: {}
+### Minnesota Early Learning Scholarships
+
+::: {.meta}
+County-level awards across five fiscal years.
+:::
+
+Minnesota publishes scholarship awards by county but not the rate at which awarded scholarships go unused. Deriving that rate, and a per-county baseline index, made visible which counties are most exposed to the funding contraction that follows a large one-time appropriation.
+
+[See the analysis and dashboard](projects.qmd#minnesota-early-learning-scholarships){.view}
+:::
+:::
+
+## How I work
+
+I state the method where the reader can see it. Suppressed cells get counted rather than quietly dropped. Derived measures get labeled as derived. When two test series are not comparable, I do not draw a trend line across them.
+
+That last one matters more than it sounds. Science MCA-IV replaced MCA-III in 2025 against a different set of standards, so there is no valid multi-year science trend in Minnesota right now. A dashboard that showed one would look better and be wrong.
+
+I write assessment items, which means I read score reports differently than most analysts do. I know what a reporting category is built to support and what it is not, and I would rather say plainly where the public data stops than point at something adjacent.

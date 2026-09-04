@@ -1,0 +1,53 @@
+---
+title: "About"
+---
+
+::: {.standfirst}
+I teach science and I write the items that measure it. That combination is why I read assessment data the way I do.
+:::
+
+## Now
+
+I teach general science, advanced science, and Project Lead the Way to grades six through eight in the Anoka-Hennepin School District, and I coach FIRST LEGO League and High Tech Kids robotics.
+
+I write science items for the Minnesota Comprehensive Assessments for the Minnesota Department of Education through Pearson. Item writing means working inside the reporting-category structure and the alignment specifications, which is a different vantage point than reading a score report from the outside. It is the reason I tend to ask what a number was built to support before asking what it shows.
+
+## What I am working toward
+
+Minnesota revises its science standards on a cycle, and the assessment built against the 2019 standards has exactly one year of results. Someone has to do the work of turning that data into something districts and the state can act on without overclaiming. That is the work I want.
+
+## Before
+
+I have taught in Mississippi and Minnesota, served in the Peace Corps in Ethiopia, and completed two AmeriCorps terms.
+
+## Education
+
+::: {.detail}
+M.S., Curriculum and Instruction
+: University of Mississippi
+
+B.S., Biology
+: University of Wisconsin
+
+Secondary licensure
+: Colorado State University
+:::
+
+## Tools
+
+::: {.detail}
+Analysis
+: Python, pandas, NumPy, SciPy
+
+Visualization
+: Tableau, Tableau Public
+
+Assessment
+: MCA item writing, test specifications and alignment, strand and reporting-category analysis, performance-level standard setting concepts
+:::
+
+## Contact
+
+::: {.contact-row}
+[Email](mailto:YOUR-EMAIL-HERE) [LinkedIn](https://www.linkedin.com/in/aaron-heit-4038123b/) [Tableau Public](https://public.tableau.com/app/profile/aaron.heit) [GitHub](https://github.com/aaronheit)
+:::
