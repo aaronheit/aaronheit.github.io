@@ -5,6 +5,8 @@ project:
 website:
   title: "Aaron Heit"
   description: "Minnesota science assessment and education data analysis."
+  favicon: favicon.svg
+  site-url: "https://aaronheit.github.io"
   open-graph: true
   navbar:
     pinned: true
@@ -44,6 +46,7 @@ format:
     code-overflow: wrap
     highlight-style: github
     email-obfuscation: references
+    include-after-body: assets/reveal.js
 
 execute:
   enabled: false
