@@ -78,11 +78,12 @@ h1.title {
 h2 {
   color: $ink-faint;
   font-weight: 600;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
   border-bottom: 1px solid $rule;
-  margin-top: 5.5rem;
-  margin-bottom: 2.75rem;
+  margin-top: 4.5rem;
+  margin-bottom: 1.6rem;
 }
+h2 + p, h2 + .project, h2 + .detail { margin-top: 0; }
 
 h3 {
   letter-spacing: -0.01em;
@@ -274,8 +275,17 @@ div.quarto-post {
 div.quarto-post:nth-child(even) { border-left-color: $slate; }
 div.quarto-post:last-child { border-bottom: 1px solid $rule !important; }
 
-div.quarto-post .thumbnail { display: none; }
-div.quarto-post .body { padding-left: 0; }
+div.quarto-post {
+  display: block !important;
+  grid-template-columns: none !important;
+}
+div.quarto-post .thumbnail,
+div.quarto-post .metadata { display: none !important; }
+div.quarto-post .body {
+  padding-left: 0 !important;
+  border: none !important;
+}
+div.quarto-post .body > :first-child { margin-top: 0; }
 
 div.quarto-post .listing-title,
 .quarto-listing .listing-title {
@@ -342,7 +352,10 @@ header#title-block-header .subtitle {
 
 /* ---------- link underline that draws in ---------- */
 
-main.content a:not(.view):not(.listing-title a):not(.nav-link) {
+main.content p > a,
+main.content li > a,
+main.content dd > a,
+.contact-row a {
   text-decoration: none;
   background-image: linear-gradient(currentColor, currentColor);
   background-position: 0 100%;
@@ -351,9 +364,18 @@ main.content a:not(.view):not(.listing-title a):not(.nav-link) {
   padding-bottom: 1px;
   transition: background-size 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-main.content a:not(.view):hover {
-  background-size: 100% 2px;
+main.content p > a:hover,
+main.content li > a:hover,
+main.content dd > a:hover,
+.contact-row a:hover { background-size: 100% 2px; }
+
+/* Listing cards manage their own link styling. */
+.quarto-listing a,
+.quarto-listing a:hover {
+  background-image: none;
+  text-decoration: none;
 }
+.quarto-listing .listing-title a:hover { text-decoration: underline; }
 
 /* ---------- project entries: spine responds on hover ---------- */
 
@@ -373,7 +395,7 @@ div.quarto-post {
 div.quarto-post:hover {
   border-left-width: 7px;
   padding-left: 26px;
-  background-color: rgba(217, 160, 60, 0.045);
+  background-color: rgba(217, 160, 60, 0.028);
 }
 
 /* ---------- the view link gets a moving caret ---------- */

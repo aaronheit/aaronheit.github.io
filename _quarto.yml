@@ -46,7 +46,7 @@ format:
     code-overflow: wrap
     highlight-style: github
     email-obfuscation: references
-    include-after-body: assets/reveal.js
+    include-after-body: assets/reveal.html
 
 execute:
   enabled: false
