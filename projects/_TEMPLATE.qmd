@@ -1,0 +1,56 @@
+---
+title: "Short project name"
+subtitle: "One line on what it argues"
+description: "Two sentences a stranger could read cold. Lead with the finding, not the method. This text is what appears on the Projects listing page and decides whether anyone clicks."
+date: 2026-01-01
+categories: [Tableau]
+---
+
+::: {.meta}
+Data source, year, and unit of analysis. One line.
+:::
+
+The question you started with, and what the data actually said. Two or three
+short paragraphs. Lead with the finding.
+
+## The finding
+
+State it in plain language with real numbers. A reader who knows nothing about
+the dataset should understand it. No jargon, no code, no acronyms you have not
+already spelled out.
+
+## What surprised me
+
+The part that was harder than it looked, or the thing you had to correct. This
+is what separates a writeup from a screenshot, and it is usually the paragraph
+people remember.
+
+```{=html}
+<div class="viz-wrap">
+<iframe class="viz viz-short" title="DASHBOARD NAME" loading="lazy"
+  src="https://public.tableau.com/views/WORKBOOK-NAME/SHEET-NAME?:showVizHome=no&:embed=true&:toolbar=no&:device=desktop"></iframe>
+</div>
+```
+
+::: {.viz-note}
+[Open full size on Tableau Public](PASTE-FULL-TABLEAU-URL)
+:::
+
+## How it was built
+
+Describe the analysis in sentences, not code. What the source file contained,
+what you had to derive because it was not in there, and how you checked that the
+derivation was right. If there is a script, put it in the code folder and link
+it at the bottom rather than pasting it here.
+
+::: {.detail}
+Source
+: Where the data came from, including year and level of aggregation.
+
+Tools
+: What you used and what you actually did with it.
+
+Notes
+: Suppression, derived measures, comparability limits, anything a careful reader
+  should know before quoting a number.
+:::

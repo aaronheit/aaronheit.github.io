@@ -1,0 +1,26 @@
+// Progressive enhancement: content is fully visible without JS.
+// The reveal class is only applied once we know JS and IntersectionObserver work.
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var targets = document.querySelectorAll(
+    'main h2, main .project, main div.quarto-post, main .viz-wrap, ' +
+    'main .detail, main .finding, main .scale-caption, main .viz-note'
+  );
+  if (!targets.length) return;
+
+  document.body.classList.add('js-reveal');
+  targets.forEach(function (el) { el.classList.add('reveal'); });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+  targets.forEach(function (el) { io.observe(el); });
+})();

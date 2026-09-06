@@ -2,19 +2,26 @@
 title: "About"
 ---
 
+::: {.masthead}
 ::: {.standfirst}
-I teach science and I write the items that measure it. That combination is why I read assessment data the way I do.
+I teach science, and I write the questions that measure whether it landed. Doing both is why I read assessment data the way I do.
+:::
+![](images/heit.png){.portrait fig-alt="Aaron Heit"}
 :::
 
 ## Now
 
-I teach general science, advanced science, and Project Lead the Way to grades six through eight in the Anoka-Hennepin School District, and I coach FIRST LEGO League and High Tech Kids robotics.
+I teach general science, advanced science, and Project Lead the Way to grades six through eight in the Anoka-Hennepin School District. I coach FIRST LEGO League and High Tech Kids robotics.
 
-I write science items for the Minnesota Comprehensive Assessments for the Minnesota Department of Education through Pearson. Item writing means working inside the reporting-category structure and the alignment specifications, which is a different vantage point than reading a score report from the outside. It is the reason I tend to ask what a number was built to support before asking what it shows.
+I also write science items for the Minnesota Comprehensive Assessments, for the Minnesota Department of Education through Pearson. Item writing means working inside the reporting categories and alignment specifications, which is a very different seat than reading a score report from the outside. It is the reason I tend to ask what a number was built to support before asking what it shows.
+
+Those two jobs pull in useful opposite directions. One of them is thirty kids in a room. The other is a spreadsheet with 833 schools in it. Most of what I build is an attempt to get the second one to say something honest to the first.
 
 ## What I am working toward
 
-Minnesota revises its science standards on a cycle, and the assessment built against the 2019 standards has exactly one year of results. Someone has to do the work of turning that data into something districts and the state can act on without overclaiming. That is the work I want.
+Minnesota assesses science against standards adopted in 2019, and the test built for them has exactly one year of results. There is real work in turning that into something districts and the state can act on without overclaiming, and not many people sit at the intersection of writing the items, teaching the content, and being able to move the data.
+
+That is the work I want, and it is what this site is for.
 
 ## Before
 
@@ -33,21 +40,21 @@ Secondary licensure
 : Colorado State University
 :::
 
-## Tools
+## What I work with
 
 ::: {.detail}
 Analysis
-: Python, pandas, NumPy, SciPy
+: Python, pandas, NumPy, SciPy. Reconciling messy published files, deriving measures the source does not contain, and checking them against something independent before trusting them.
 
 Visualization
-: Tableau, Tableau Public
+: Tableau and Tableau Public. Dashboards built to survive a skeptical reader.
 
 Assessment
-: MCA item writing, test specifications and alignment, strand and reporting-category analysis, performance-level standard setting concepts
+: MCA science item writing, test specifications and alignment, strand and reporting-category analysis, performance level and cut score interpretation.
 :::
 
 ## Contact
 
 ::: {.contact-row}
-[Email](mailto:YOUR-EMAIL-HERE) [LinkedIn](https://www.linkedin.com/in/aaron-heit-4038123b/) [Tableau Public](https://public.tableau.com/app/profile/aaron.heit) [GitHub](https://github.com/aaronheit)
+[heit.aaron@gmail.com](mailto:heit.aaron@gmail.com) [LinkedIn](https://www.linkedin.com/in/aaron-heit-4038123b/) [Tableau Public](https://public.tableau.com/app/profile/aaron.heit) [GitHub](https://github.com/aaronheit)
 :::

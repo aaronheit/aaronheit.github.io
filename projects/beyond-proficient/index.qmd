@@ -1,0 +1,85 @@
+---
+title: "Beyond Proficient"
+subtitle: "What Minnesota's science proficiency rates hide"
+description: "Nine of 833 Minnesota elementary schools average a proficient score in fifth grade science. The gap between schools is much smaller than the proficiency numbers suggest."
+date: 2026-09-04
+categories: [Assessment, Science MCA, Tableau]
+---
+
+::: {.meta}
+Science MCA-IV, spring 2025. Grades 5, 8, and high school. 833 elementary schools statewide.
+:::
+
+Spring 2025 was the first administration of Science MCA-IV, built against Minnesota's 2019 science standards. It replaced the older MCA-III, and results from the two are not comparable, so this is a snapshot of one year rather than a trend.
+
+The question I started with was whether school-to-school differences in science proficiency reflect differences in teaching. What the numbers suggested instead is that they mostly reflect where the passing line happens to sit.
+
+## The finding
+
+Minnesota's grade 5 science scale runs from 501 to 599. A student is counted as proficient at 550.
+
+Nine of 833 Minnesota elementary schools have a fifth grade average at or above that line. The middle 80% of schools fall between 532 and 546 — a fourteen-point band on a ninety-nine-point scale. Meanwhile the typical school has an internal spread of about eleven points, meaning the range of scores inside one building is nearly as wide as the range across almost the entire state.
+
+Because the cut sits just above nearly every school's average, and because the band immediately below it is only ten points wide, very small differences in average performance turn into very large differences in reported proficiency.
+
+Two schools illustrate it. One averages 536 and reports 17% proficient. The other averages 545 and reports 43%. Nine points of difference, two and a half times the proficiency rate.
+
+## What a proficiency rate is actually measuring
+
+I tested this directly. Using nothing but each school's average score and its spread, a standard statistical model predicts the proficiency rate the state actually published, with a correlation of 0.965 across all 833 schools. The typical disagreement between the model and the published figure is under four percentage points.
+
+A proficiency rate is not measuring something separate from the average score. It is a re-encoding of it, and the encoding exaggerates the differences.
+
+## The more useful view
+
+If proficiency rates flatten the picture, the distribution restores it. Every school reports how many of its students land in each of the four performance levels, and the level just below proficient turns out to be the interesting one.
+
+Statewide, the median elementary school has a third of its fifth graders in that band, within ten scale points of the line. Sorting schools by the size of that group rather than by proficiency inverts the usual ranking, and it produces something a proficiency rate never can: a specific, countable group of students who are close.
+
+## Who didn't take the test
+
+MDE publishes something most states do not — refusal counts broken into parent refusals and student refusals, school by school.
+
+The pattern is consistent and it changes with age. In fifth grade, opting out is overwhelmingly a parent decision. By high school it has become a student decision: parent refusals grow about fourfold from grade 5 to high school, while student refusals grow twentyfold. Forty-six percent of Minnesota high schools fall below the federal 95% participation threshold in science.
+
+That matters for every other number on this page, because a proficiency rate built on 78% of a school's students is not the same measurement as one built on 96%.
+
+```{=html}
+<div class="viz-wrap">
+<iframe class="viz viz-tall" title="Beyond Proficient dashboard" loading="lazy"
+  src="https://public.tableau.com/views/BeyondProficient2025MCAdataproficienciesandopt-outs/BeyondProficient?:showVizHome=no&:embed=true&:toolbar=no&:device=desktop"></iframe>
+</div>
+```
+
+::: {.viz-note}
+[Open full size on Tableau Public](https://public.tableau.com/app/profile/aaron.heit/viz/BeyondProficient2025MCAdataproficienciesandopt-outs/BeyondProficient)
+:::
+
+## How it was built
+
+MDE publishes a school-level file containing each school's average score, its standard deviation, the count of students at each performance level, and the components of non-participation. It does not publish the things this analysis needed, so a Python script derives them.
+
+Three derived measures do the work. The first is how far each school's average sits below the proficiency cut, expressed both in scale points and in standard deviations. The second is what share of students a normal distribution with that school's average and spread would place above the cut. The third is the difference between that estimate and the share MDE actually reported.
+
+That third number is the whole check. If the estimate and the published figure had disagreed, the argument would not hold. They agree closely, which is what licenses the claim that proficiency is largely a mechanical consequence of the cut.
+
+Participation needed a rate MDE does not publish. The state provides the counts — tested, absent, refused, exempted, invalidated — but no school-level percentage. I built one from those components and labeled it as derived everywhere it appears, because it is not the state's official participation measure and should not be mistaken for it.
+
+::: {.detail}
+Source
+: MDE Assessment Files, All Standards-Based (MCA/MTAS/ALTMCA), Science, Public, 2025. School-level records, all students.
+
+Cut scores
+: MDE, Science Performance Level Cut Scores and Score Ranges, September 2025.
+
+Tools
+: Python and pandas for the transformation, Tableau for the published views.
+
+Suppression
+: MDE suppresses results for fewer than 10 tested students. 578 of 2,402 school records are suppressed. They are excluded from the charts and counted in the methods panel rather than dropped silently.
+
+Comparability
+: Science MCA-IV replaced MCA-III in 2025 against different standards. No multi-year trend is shown, because none would be valid.
+:::
+
+[Read the transform script on GitHub](https://github.com/aaronheit/aaronheit.github.io/blob/main/code/build_science.py){.view}

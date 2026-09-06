@@ -190,19 +190,63 @@ p, li { max-width: 64ch; }
 
 .view { display: inline-block; margin-top: 1.6rem; font-weight: 600; font-size: 0.95rem; }
 
+/* ---------- profile photo ---------- */
+
+.masthead {
+  display: flex;
+  align-items: flex-start;
+  gap: 34px;
+  flex-wrap: wrap-reverse;
+}
+.masthead .standfirst { flex: 1 1 24rem; }
+
+.portrait {
+  flex: 0 0 auto;
+  width: 148px;
+  height: 148px;
+  object-fit: cover;
+  border: 1px solid $rule;
+  filter: saturate(0.92);
+}
+
 /* ---------- dashboard embeds ---------- */
 
+/* Break the iframe out of the 940px content column so the 1200px
+   dashboard renders without clipping. */
+.viz-wrap {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 0 24px;
+  margin-top: 1.9rem;
+  box-sizing: border-box;
+}
+
 .viz {
+  display: block;
   width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
   border: 1px solid $rule;
   background: #fff;
-  margin-top: 1.9rem;
-  display: block;
 }
-.viz-tall  { height: 1000px; }
-.viz-short { height: 680px; }
 
-.viz-note { font-size: 0.86rem; color: $ink-faint; margin-top: 0.7rem; }
+.viz-tall  { height: 2700px; }
+.viz-short { height: 900px; }
+
+.viz-note {
+  font-size: 0.86rem;
+  color: $ink-faint;
+  margin-top: 0.7rem;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body { overflow-x: hidden; }
 
 /* ---------- code ---------- */
 
@@ -214,6 +258,163 @@ pre {
   padding: 1.1rem 1.25rem;
 }
 div.sourceCode { margin: 1.6rem 0; }
+
+/* ---------- project listing ---------- */
+
+.quarto-listing { margin-top: 3rem; }
+
+.quarto-listing-default .list-item,
+div.quarto-post {
+  border-top: 1px solid $rule;
+  border-bottom: none !important;
+  padding: 2.1rem 0 2.1rem 22px;
+  border-left: 3px solid $band-int;
+  margin-bottom: 0;
+}
+div.quarto-post:nth-child(even) { border-left-color: $slate; }
+div.quarto-post:last-child { border-bottom: 1px solid $rule !important; }
+
+div.quarto-post .thumbnail { display: none; }
+div.quarto-post .body { padding-left: 0; }
+
+div.quarto-post .listing-title,
+.quarto-listing .listing-title {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.15rem;
+  a { text-decoration: none; color: $ink; }
+  a:hover { color: $slate; text-decoration: underline; }
+}
+
+.quarto-listing .listing-subtitle {
+  font-size: 0.98rem;
+  color: $ink-soft;
+  margin-bottom: 0.7rem;
+  font-style: normal;
+}
+
+.quarto-listing .listing-description {
+  font-size: 0.97rem;
+  color: $ink;
+  max-width: 62ch;
+  a { text-decoration: none; color: inherit; }
+}
+
+.quarto-listing .listing-categories { margin-top: 0.9rem; }
+.quarto-listing .listing-category {
+  font-size: 0.74rem;
+  text-transform: none;
+  color: $ink-faint;
+  border: 1px solid $rule;
+  border-radius: 0;
+  padding: 2px 9px;
+  margin-right: 6px;
+  opacity: 1;
+}
+
+.quarto-title-block .subtitle,
+header#title-block-header .subtitle {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: $ink-soft;
+  max-width: 46ch;
+}
+
+
+/* ---------- scroll reveal (JS-gated, no-JS shows everything) ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  body.js-reveal .reveal {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  body.js-reveal .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- link underline that draws in ---------- */
+
+main.content a:not(.view):not(.listing-title a):not(.nav-link) {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  padding-bottom: 1px;
+  transition: background-size 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+main.content a:not(.view):hover {
+  background-size: 100% 2px;
+}
+
+/* ---------- project entries: spine responds on hover ---------- */
+
+.project .spine,
+.project .spine-alt {
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              filter 0.3s ease;
+}
+.project:hover .spine,
+.project:hover .spine-alt { filter: saturate(1.35); }
+
+div.quarto-post {
+  transition: border-left-width 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+              padding-left 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background-color 0.28s ease;
+}
+div.quarto-post:hover {
+  border-left-width: 7px;
+  padding-left: 26px;
+  background-color: rgba(217, 160, 60, 0.045);
+}
+
+/* ---------- the view link gets a moving caret ---------- */
+
+.view {
+  position: relative;
+  text-decoration: none;
+  padding-right: 20px;
+}
+.view::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -4px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.view:hover::after { transform: rotate(-45deg) translate(3px, 3px); }
+
+/* ---------- portrait warms on hover ---------- */
+
+.portrait {
+  transition: filter 0.5s ease;
+}
+.portrait:hover { filter: saturate(1.06); }
+
+/* ---------- cut line breathes once after the bands land ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .cut { animation: cutdrop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.95s both; }
+  @keyframes cutdrop {
+    from { transform: scaleY(0); opacity: 0; }
+    to   { transform: scaleY(1); opacity: 1; }
+  }
+  .cut { transform-origin: top center; }
+}
 
 /* ---------- footer ---------- */
 
@@ -240,8 +441,11 @@ div.sourceCode { margin: 1.6rem 0; }
 @media (max-width: 620px) {
   h2 { margin-top: 4rem; }
   .band span { font-size: 0.68rem; }
-  .viz-tall  { height: 720px; }
-  .viz-short { height: 520px; }
+  .viz-wrap  { padding: 0 12px; }
+  .viz-tall  { height: 760px; }
+  .viz-short { height: 560px; }
+  .masthead  { gap: 22px; }
+  .portrait  { width: 108px; height: 108px; }
   .detail {
     grid-template-columns: 1fr;
     gap: 2px;

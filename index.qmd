@@ -2,12 +2,15 @@
 title: "Aaron Heit"
 ---
 
+::: {.masthead}
 ::: {.standfirst}
-Middle school science teacher in Anoka-Hennepin. I write science items for the Minnesota Comprehensive Assessments, and I analyze what the resulting data can and cannot tell us.
+Middle school science teacher in Minnesota. I visualize education data, and I try to be clear about what it can tell us and where it stops.
+:::
+![](images/heit.png){.portrait fig-alt="Aaron Heit"}
 :::
 
 ::: {.contact-row}
-[Email](mailto:YOUR-EMAIL-HERE) [LinkedIn](https://www.linkedin.com/in/aaron-heit-4038123b/) [Tableau Public](https://public.tableau.com/app/profile/aaron.heit) [GitHub](https://github.com/aaronheit)
+[heit.aaron@gmail.com](mailto:heit.aaron@gmail.com) [LinkedIn](https://www.linkedin.com/in/aaron-heit-4038123b/) [Tableau Public](https://public.tableau.com/app/profile/aaron.heit) [GitHub](https://github.com/aaronheit)
 :::
 
 ::: {.scale}
@@ -49,7 +52,7 @@ Minnesota reports school science performance as a percent proficient. That numbe
 
 Which means proficiency rates exaggerate real differences. Two schools nine scale points apart report 17% and 43%.
 
-[See the analysis and dashboard](projects.qmd){.view}
+[See the analysis and dashboard](projects/beyond-proficient/){.view}
 :::
 :::
 
@@ -65,14 +68,14 @@ County-level awards across five fiscal years.
 
 Minnesota publishes scholarship awards by county but not the rate at which awarded scholarships go unused. Deriving that rate, and a per-county baseline index, made visible which counties are most exposed to the funding contraction that follows a large one-time appropriation.
 
-[See the analysis and dashboard](projects.qmd#minnesota-early-learning-scholarships){.view}
+[See the analysis and dashboard](projects/early-learning/){.view}
 :::
 :::
 
 ## How I work
 
-I state the method where the reader can see it. Suppressed cells get counted rather than quietly dropped. Derived measures get labeled as derived. When two test series are not comparable, I do not draw a trend line across them.
+When two test series are not comparable, I do not draw a trend line across them, even when the chart would look better for it.
 
-That last one matters more than it sounds. Science MCA-IV replaced MCA-III in 2025 against a different set of standards, so there is no valid multi-year science trend in Minnesota right now. A dashboard that showed one would look better and be wrong.
+Science MCA-IV replaced MCA-III in 2025 against a different set of standards. There is no valid multi-year science trend in Minnesota right now, and saying that plainly is more useful than pointing at something adjacent. The same goes for suppressed cells, which get counted rather than quietly dropped, and for measures I derive myself, which get labeled as derived.
 
-I write assessment items, which means I read score reports differently than most analysts do. I know what a reporting category is built to support and what it is not, and I would rather say plainly where the public data stops than point at something adjacent.
+The reason to be careful about any of this is that teachers have to make decisions with these numbers. A clear picture of what the data supports is worth more to them than a confident one.

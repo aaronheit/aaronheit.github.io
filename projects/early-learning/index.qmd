@@ -1,0 +1,41 @@
+---
+title: "Minnesota Early Learning Scholarships"
+subtitle: "County access and exposure to a funding cliff"
+description: "Minnesota publishes scholarship awards by county but not the rate at which awarded scholarships go unused. Deriving that rate showed which counties are most exposed when a one-time appropriation runs out."
+date: 2026-06-15
+categories: [Early Childhood, Policy, Tableau]
+---
+
+::: {.meta}
+Minnesota Early Learning Scholarships, county level, five fiscal years.
+:::
+
+Minnesota awards Early Learning Scholarships to help families afford high-quality early education. The state publishes how many awards each county receives. It does not publish how many of those awards actually get used.
+
+That gap matters, because an awarded scholarship that never converts into a seat is not access. Deriving the unselected rate, county by county, along with a per-county baseline against typical funding levels, made visible which counties stand to lose the most when a large one-time appropriation runs out and awards return to their normal level.
+
+The pipeline reconciles five fiscal years of differently structured published files into a single consistent table before any of it reaches the visualization.
+
+The hardest part was not the extraction. An early version of the analysis summed across all five fiscal years instead of isolating a single one, which inflated every county rate and would have made the policy claim flatly wrong. Catching that is the reason the fiscal year basis is now stated on every view.
+
+```{=html}
+<div class="viz-wrap">
+<iframe class="viz viz-short" title="Minnesota Early Learning Scholarships dashboard" loading="lazy"
+  src="https://public.tableau.com/views/MinnesotaEarlyLearningScholarshipsCountyAccessOverview/Dashboard2?:showVizHome=no&:embed=true&:toolbar=no&:device=desktop"></iframe>
+</div>
+```
+
+::: {.viz-note}
+[Open full size on Tableau Public](https://public.tableau.com/app/profile/aaron.heit/viz/MinnesotaEarlyLearningScholarshipsCountyAccessOverview/Dashboard2)
+:::
+
+::: {.detail}
+Source
+: Minnesota Department of Education Early Learning Scholarship award files, county level, five fiscal years.
+
+Tools
+: Python and pandas for extraction and reconciliation, Tableau for the published views.
+
+Derived measures
+: The unselected-award rate and the per-county baseline index are not published by the state. Both are labeled as derived, and the fiscal year basis appears on every view.
+:::
