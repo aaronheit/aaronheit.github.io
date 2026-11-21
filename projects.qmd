@@ -4,7 +4,8 @@ listing:
   contents: projects
   type: default
   sort: "date desc"
-  fields: [title, subtitle, description]
+  fields: [date, title, subtitle, description]
+  date-format: "MMMM YYYY"
   categories: false
   sort-ui: false
   filter-ui: false

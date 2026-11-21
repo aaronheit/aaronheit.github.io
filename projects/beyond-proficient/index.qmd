@@ -28,7 +28,9 @@ Two schools illustrate it. One averages 536 and reports 17% proficient. The othe
 
 I tested this directly. Using nothing but each school's average score and its spread, a standard statistical model predicts the proficiency rate the state actually published, with a correlation of 0.965 across all 833 schools. The typical disagreement between the model and the published figure is under four percentage points.
 
-A proficiency rate is not measuring something separate from the average score. It is a re-encoding of it, and the encoding exaggerates the differences.
+A proficiency rate is not measuring something separate from the average score. It is a re-encoding of it, and the encoding exaggerates the differences. This is a well-documented problem in educational measurement; Andrew Ho's 2008 paper in *Educational Researcher*, "The Problem with 'Proficiency'," lays out why proficiency-based statistics give a limited and sometimes misleading view of test score distributions.
+
+The same distortion reaches achievement gaps, which I take apart in [The Gap Depends on the Line](../achievement-gaps/index.qmd).
 
 ## The more useful view
 

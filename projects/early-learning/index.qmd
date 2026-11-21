@@ -2,7 +2,7 @@
 title: "Minnesota Early Learning Scholarships"
 subtitle: "County access and exposure to a funding cliff"
 description: "Minnesota publishes scholarship awards by county but not the rate at which awarded scholarships go unused. Deriving that rate showed which counties are most exposed when a one-time appropriation runs out."
-date: 2026-06-15
+date: 2026-08-15
 categories: [Early Childhood, Policy, Tableau]
 ---
 

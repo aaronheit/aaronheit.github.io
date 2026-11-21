@@ -1,0 +1,311 @@
+---
+title: "The Gap Depends on the Line"
+subtitle: "What proficiency rates do to achievement gaps"
+description: "Using only numbers the state published, the science gap between fifth grade English learners and their classmates is 50 points, 27 points, or 5 points, depending on which of MDE's own cut scores you measure it at."
+date: 2026-11-21
+categories: [Data, Assessment, Equity]
+---
+
+::: {.meta}
+Science MCA-IV, spring 2025. Statewide results by student group, grades 5, 8, and high school.
+:::
+
+When Minnesota reports an achievement gap, it usually means a gap in proficiency rates: the share of one group above the proficiency line, minus the share of another group. That number has a property most readers never notice. Its size depends on where the line is drawn.
+
+## Three gaps, one test
+
+MDE publishes the share of students at each of four performance levels. That means a gap can be measured at three different lines: the Intermediate cut, the proficiency cut, and the Advanced cut.
+
+For fifth grade English learners and their classmates, the published numbers give three very different answers. At the Intermediate line, the gap is 50 percentage points. At the proficiency line, it is 27. At the Advanced line, it is 5.
+
+Same students, same test, same scores. The only thing that changed is which line someone counted from.
+
+## Move the line yourself
+
+Drag the line across the chart, or use the slider. The shaded areas are the students in each group who score at or above the line. Watch the gap change while the standardized difference below it stays exactly where it is.
+
+```{=html}
+<div class="gapviz" id="gapviz">
+  <div class="gv-controls">
+    <label for="gv-grade">Grade<select id="gv-grade"></select></label>
+    <label for="gv-pair" class="gv-wide">Comparison<select id="gv-pair"></select></label>
+  </div>
+  <div class="gv-readout" aria-live="polite">
+    <div class="gv-big"><span id="gv-gap"></span><small id="gv-gap-label"></small></div>
+    <div class="gv-legend-wrap">
+      <p class="gv-legend-cap">At or above the line</p>
+      <ul class="gv-legend">
+        <li><span class="gv-sw ref" aria-hidden="true"></span><span id="gv-ref-name"></span><b id="gv-ref-val"></b></li>
+        <li><span class="gv-sw foc" aria-hidden="true"></span><span id="gv-foc-name"></span><b id="gv-foc-val"></b></li>
+      </ul>
+    </div>
+  </div>
+  <svg id="gv-dist" class="gv-svg gv-drag" role="img"></svg>
+  <div class="gv-slider-row">
+    <input type="range" id="gv-cut" min="501" max="599" step="1" value="550" aria-label="Move the line">
+    <div class="gv-presets" role="group" aria-label="Jump to one of MDE's cut scores">
+      <button type="button" data-cut="I">Intermediate line</button>
+      <button type="button" data-cut="M">Proficiency line</button>
+      <button type="button" data-cut="A">Advanced line</button>
+    </div>
+  </div>
+  <p class="gv-d" id="gv-d"></p>
+  <p class="gv-curve-title">The gap at every possible line</p>
+  <svg id="gv-curve" class="gv-svg" role="img"></svg>
+  <p class="gv-caption">The curve is the estimated gap wherever the cut could be drawn. The dots are the gaps MDE actually published at its three cut scores.</p>
+</div>
+```
+
+## A measure that holds still
+
+There is a way to describe a gap that does not depend on any line: compare the two groups' average scores, scaled by how spread out the scores are. Researchers call this a standardized mean difference. For fifth grade English learners it is about 1.3 standard deviations, and it stays 1.3 no matter where the line goes.
+
+Ranking gaps this way changes the picture. Students experiencing homelessness have the fifth-largest gap in fifth grade when measured by proficiency rates, but the second-largest when measured by standardized difference. The same thing happens in grade 8. Their scores sit so far below the proficiency line that the proficiency gap gets compressed, hiding how far apart the groups actually are.
+
+The opposite happens with boys and girls. Fifth grade boys and girls average almost exactly the same score, half a point apart. Boys are still 3.7 points more likely to be proficient, because their scores are more spread out, which puts more of them above a line that sits well above the average. That gap is real, but it is about spread, not about one group scoring higher.
+
+The table follows the grade selected above. Highlighted rows move two or more places between the two rankings. Select any comparison to load it into the chart.
+
+```{=html}
+<div class="gv-table-wrap" id="gv-table"></div>
+```
+
+## Why this matters
+
+This is a known problem in educational measurement. Andrew Ho's 2008 paper in *Educational Researcher*, "The Problem with 'Proficiency'," showed that proficiency-based statistics give a limited and sometimes misleading picture of gaps and of how gaps change, and argued for looking at the whole score distribution instead. These Minnesota numbers are a clear local example.
+
+None of this makes proficiency gaps wrong. They answer a specific question: how many more students in one group cleared this particular line? The trouble starts when they get read as an answer to a different question, which is how far apart two groups really are. A district deciding where to focus support, or a state judging whether a gap is closing, needs to know which of those questions it is asking.
+
+## How it was built
+
+Every gap at the three cut scores comes straight from MDE's published shares at each performance level. None of those numbers were modeled.
+
+The continuous curve uses a normal distribution built from each group's published average score and standard deviation. To check it, I compared the model against the published shares at all three cut scores, for every group in every grade. The average miss is about two percentage points and the largest is about six. The curve is a faithful way to see between the published lines, not a replacement for them.
+
+The standardized difference uses a pooled standard deviation, built from each group's published spread and its count of valid MCA scores.
+
+::: {.detail}
+Source
+: MDE Assessment Files, All Standards-Based (MCA/MTAS/ALTMCA), Science, Public, 2025. State level.
+
+Cut scores
+: MDE, Science Performance Level Cut Scores and Score Ranges, September 2025.
+
+Tools
+: Python and pandas for the analysis. The interactive chart is written in plain JavaScript with no outside libraries.
+
+Special education
+: Published shares for students receiving special education combine the MCA with the Alternate MCA, which has its own scale and cut scores. About 7 to 9 percent of that group took the Alternate MCA, while the average and spread come from the MCA alone. Read that comparison with more caution than the others.
+
+Groups left out
+: Native Hawaiian or Pacific Islander students, students of other Indigenous peoples, and migrant students number under 100 per grade statewide, too few for stable comparisons. Military family status and limited or interrupted formal education are not included in this version.
+:::
+
+[Read the analysis script on GitHub](https://github.com/aaronheit/aaronheit.github.io/blob/main/code/gaps_analysis.py){.view}
+
+```{=html}
+<script type="application/json" id="gv-data">{"grades":{"5":{"label":"Grade 5","min":501,"max":599,"cuts":{"I":540,"M":550,"A":561},"groups":{"el":{"name":"English learners","mean":527.76,"sd":10.99,"n":6606,"alt_share":0.0189,"ge":{"I":0.1523,"M":0.022,"A":0.0055}},"not_el":{"name":"Not English learners","mean":542.31,"sd":11.59,"n":55206,"alt_share":0.0117,"ge":{"I":0.6479,"M":0.2943,"A":0.0506}},"hl":{"name":"Experiencing homelessness","mean":528.27,"sd":12.54,"n":1148,"alt_share":0.0279,"ge":{"I":0.2032,"M":0.0635,"A":0.0169}},"not_hl":{"name":"Not experiencing homelessness","mean":540.99,"sd":12.25,"n":60664,"alt_share":0.0122,"ge":{"I":0.6021,"M":0.2689,"A":0.0463}},"frpm":{"name":"Eligible for free or reduced-price meals","mean":535.47,"sd":12.28,"n":25297,"alt_share":0.0181,"ge":{"I":0.411,"M":0.136,"A":0.0206}},"not_frpm":{"name":"Not eligible","mean":544.42,"sd":11.04,"n":36515,"alt_share":0.0085,"ge":{"I":0.7231,"M":0.3553,"A":0.0633}},"sped":{"name":"Receiving special education","mean":533.56,"sd":13.27,"n":10524,"alt_share":0.069,"ge":{"I":0.3754,"M":0.1588,"A":0.0426}},"not_sped":{"name":"Not receiving special education","mean":542.24,"sd":11.64,"n":51288,"alt_share":0.0,"ge":{"I":0.6429,"M":0.2884,"A":0.0464}},"black":{"name":"Black students","mean":533.26,"sd":12.24,"n":7348,"alt_share":0.0213,"ge":{"I":0.3364,"M":0.1044,"A":0.0153}},"hisp":{"name":"Hispanic or Latino students","mean":534.13,"sd":12.99,"n":7009,"alt_share":0.0146,"ge":{"I":0.3724,"M":0.125,"A":0.0201}},"amind":{"name":"American Indian students","mean":535.8,"sd":12.25,"n":2178,"alt_share":0.0189,"ge":{"I":0.4207,"M":0.1428,"A":0.0225}},"asian":{"name":"Asian students","mean":539.61,"sd":12.38,"n":4640,"alt_share":0.0151,"ge":{"I":0.5402,"M":0.2237,"A":0.0439}},"multi":{"name":"Students of two or more races","mean":540.95,"sd":12.31,"n":3339,"alt_share":0.015,"ge":{"I":0.595,"M":0.2708,"A":0.0516}},"white":{"name":"White students","mean":543.92,"sd":10.95,"n":37177,"alt_share":0.0093,"ge":{"I":0.7061,"M":0.3361,"A":0.0579}},"female":{"name":"Female students","mean":540.5,"sd":12.0,"n":30518,"alt_share":0.0091,"ge":{"I":0.5843,"M":0.246,"A":0.039}},"male":{"name":"Male students","mean":541.0,"sd":12.72,"n":31310,"alt_share":0.0157,"ge":{"I":0.6045,"M":0.2834,"A":0.0522}}},"stats":[{"pair":"el","d":1.26,"gaps":{"I":49.6,"M":27.2,"A":4.5},"peak_cut":536,"peak_gap":48.1,"rank_d":1,"rank_prof":1},{"pair":"hl","d":1.04,"gaps":{"I":39.9,"M":20.5,"A":2.9},"peak_cut":535,"peak_gap":39.2,"rank_d":2,"rank_prof":5},{"pair":"black","d":0.95,"gaps":{"I":37.0,"M":23.2,"A":4.3},"peak_cut":538,"peak_gap":35.7,"rank_d":3,"rank_prof":2},{"pair":"hisp","d":0.87,"gaps":{"I":33.4,"M":21.1,"A":3.8},"peak_cut":538,"peak_gap":32.4,"rank_d":4,"rank_prof":4},{"pair":"frpm","d":0.77,"gaps":{"I":31.2,"M":21.9,"A":4.3},"peak_cut":539,"peak_gap":30.2,"rank_d":5,"rank_prof":3},{"pair":"amind","d":0.74,"gaps":{"I":28.5,"M":19.3,"A":3.5},"peak_cut":539,"peak_gap":27.7,"rank_d":6,"rank_prof":6},{"pair":"sped","d":0.73,"gaps":{"I":26.8,"M":13.0,"A":0.4},"peak_cut":536,"peak_gap":27.7,"rank_d":7,"rank_prof":7},{"pair":"asian","d":0.39,"gaps":{"I":16.6,"M":11.2,"A":1.4},"peak_cut":539,"peak_gap":15.4,"rank_d":8,"rank_prof":8},{"pair":"multi","d":0.27,"gaps":{"I":11.1,"M":6.5,"A":0.6},"peak_cut":539,"peak_gap":11.1,"rank_d":9,"rank_prof":9},{"pair":"gender","d":0.04,"gaps":{"I":2.0,"M":3.7,"A":1.3},"peak_cut":550,"peak_gap":2.5,"rank_d":10,"rank_prof":10}]},"8":{"label":"Grade 8","min":801,"max":899,"cuts":{"I":840,"M":850,"A":859},"groups":{"el":{"name":"English learners","mean":824.18,"sd":11.16,"n":5418,"alt_share":0.0147,"ge":{"I":0.0819,"M":0.0153,"A":0.0055}},"not_el":{"name":"Not English learners","mean":837.76,"sd":12.61,"n":53086,"alt_share":0.0107,"ge":{"I":0.4805,"M":0.1822,"A":0.0426}},"hl":{"name":"Experiencing homelessness","mean":825.22,"sd":12.52,"n":925,"alt_share":0.0232,"ge":{"I":0.15,"M":0.0391,"A":0.0116}},"not_hl":{"name":"Not experiencing homelessness","mean":836.68,"sd":13.02,"n":57579,"alt_share":0.0108,"ge":{"I":0.4482,"M":0.1688,"A":0.0396}},"frpm":{"name":"Eligible for free or reduced-price meals","mean":831.34,"sd":12.78,"n":22595,"alt_share":0.0168,"ge":{"I":0.2815,"M":0.0826,"A":0.0199}},"not_frpm":{"name":"Not eligible","mean":839.74,"sd":12.21,"n":35909,"alt_share":0.0074,"ge":{"I":0.5462,"M":0.22,"A":0.0513}},"sped":{"name":"Receiving special education","mean":827.74,"sd":13.19,"n":8115,"alt_share":0.0745,"ge":{"I":0.2394,"M":0.1057,"A":0.0438}},"not_sped":{"name":"Not receiving special education","mean":837.91,"sd":12.51,"n":50389,"alt_share":0.0,"ge":{"I":0.4789,"M":0.1773,"A":0.0383}},"black":{"name":"Black students","mean":829.73,"sd":12.86,"n":6678,"alt_share":0.0182,"ge":{"I":0.2418,"M":0.0695,"A":0.0153}},"hisp":{"name":"Hispanic or Latino students","mean":829.72,"sd":12.96,"n":6359,"alt_share":0.014,"ge":{"I":0.2367,"M":0.0677,"A":0.0154}},"amind":{"name":"American Indian students","mean":831.21,"sd":12.84,"n":1984,"alt_share":0.0154,"ge":{"I":0.2719,"M":0.0838,"A":0.0203}},"asian":{"name":"Asian students","mean":837.59,"sd":12.87,"n":4359,"alt_share":0.0089,"ge":{"I":0.4527,"M":0.1858,"A":0.0541}},"multi":{"name":"Students of two or more races","mean":836.7,"sd":13.2,"n":2838,"alt_share":0.0108,"ge":{"I":0.4485,"M":0.1669,"A":0.0446}},"white":{"name":"White students","mean":839.1,"sd":12.2,"n":36195,"alt_share":0.0091,"ge":{"I":0.5259,"M":0.2046,"A":0.0465}},"female":{"name":"Female students","mean":836.82,"sd":12.44,"n":28320,"alt_share":0.0086,"ge":{"I":0.4452,"M":0.1548,"A":0.0354}},"male":{"name":"Male students","mean":836.19,"sd":13.67,"n":30214,"alt_share":0.0133,"ge":{"I":0.4414,"M":0.1776,"A":0.0426}}},"stats":[{"pair":"el","d":1.09,"gaps":{"I":39.9,"M":16.7,"A":3.7},"peak_cut":832,"peak_gap":43.4,"rank_d":1,"rank_prof":1},{"pair":"hl","d":0.88,"gaps":{"I":29.8,"M":13.0,"A":2.8},"peak_cut":832,"peak_gap":34.7,"rank_d":2,"rank_prof":5},{"pair":"black","d":0.76,"gaps":{"I":28.4,"M":13.5,"A":3.1},"peak_cut":834,"peak_gap":29.2,"rank_d":4,"rank_prof":4},{"pair":"hisp","d":0.76,"gaps":{"I":28.9,"M":13.7,"A":3.1},"peak_cut":834,"peak_gap":29.2,"rank_d":5,"rank_prof":2},{"pair":"frpm","d":0.68,"gaps":{"I":26.5,"M":13.7,"A":3.1},"peak_cut":835,"peak_gap":26.4,"rank_d":6,"rank_prof":3},{"pair":"amind","d":0.64,"gaps":{"I":25.4,"M":12.1,"A":2.6},"peak_cut":835,"peak_gap":24.8,"rank_d":7,"rank_prof":6},{"pair":"sped","d":0.81,"gaps":{"I":24.0,"M":7.2,"A":-0.5},"peak_cut":833,"peak_gap":30.8,"rank_d":3,"rank_prof":7},{"pair":"asian","d":0.12,"gaps":{"I":7.3,"M":1.9,"A":-0.8},"peak_cut":834,"peak_gap":5.2,"rank_d":9,"rank_prof":10},{"pair":"multi","d":0.2,"gaps":{"I":7.7,"M":3.8,"A":0.2},"peak_cut":834,"peak_gap":8.1,"rank_d":8,"rank_prof":8},{"pair":"gender","d":-0.05,"gaps":{"I":-0.4,"M":2.3,"A":0.7},"peak_cut":827,"peak_gap":-3.6,"rank_d":10,"rank_prof":9}]},"HS":{"label":"High school","min":1001,"max":1099,"cuts":{"I":1040,"M":1050,"A":1067},"groups":{"el":{"name":"English learners","mean":1023.03,"sd":14.0,"n":3878,"alt_share":0.0167,"ge":{"I":0.1299,"M":0.0368,"A":0.0061}},"not_el":{"name":"Not English learners","mean":1043.21,"sd":17.65,"n":47241,"alt_share":0.0114,"ge":{"I":0.6202,"M":0.3932,"A":0.0876}},"hl":{"name":"Experiencing homelessness","mean":1026.76,"sd":16.29,"n":563,"alt_share":0.0243,"ge":{"I":0.2305,"M":0.1005,"A":0.0225}},"not_hl":{"name":"Not experiencing homelessness","mean":1041.85,"sd":18.16,"n":50556,"alt_share":0.0117,"ge":{"I":0.5868,"M":0.369,"A":0.082}},"frpm":{"name":"Eligible for free or reduced-price meals","mean":1034.83,"sd":17.57,"n":17975,"alt_share":0.0193,"ge":{"I":0.4242,"M":0.2243,"A":0.0384}},"not_frpm":{"name":"Not eligible","mean":1045.4,"sd":17.45,"n":33144,"alt_share":0.0078,"ge":{"I":0.67,"M":0.4439,"A":0.105}},"sped":{"name":"Receiving special education","mean":1028.69,"sd":17.02,"n":6135,"alt_share":0.0908,"ge":{"I":0.3131,"M":0.1692,"A":0.0579}},"not_sped":{"name":"Not receiving special education","mean":1043.46,"sd":17.63,"n":44984,"alt_share":0.0,"ge":{"I":0.6233,"M":0.3956,"A":0.0849}},"black":{"name":"Black students","mean":1031.34,"sd":17.15,"n":4799,"alt_share":0.0244,"ge":{"I":0.345,"M":0.1616,"A":0.0252}},"hisp":{"name":"Hispanic or Latino students","mean":1032.01,"sd":17.72,"n":5747,"alt_share":0.0129,"ge":{"I":0.3492,"M":0.1774,"A":0.0297}},"amind":{"name":"American Indian students","mean":1034.94,"sd":17.14,"n":1680,"alt_share":0.0187,"ge":{"I":0.4323,"M":0.2144,"A":0.0339}},"asian":{"name":"Asian students","mean":1043.73,"sd":17.33,"n":3750,"alt_share":0.0124,"ge":{"I":0.616,"M":0.3819,"A":0.0961}},"multi":{"name":"Students of two or more races","mean":1041.55,"sd":18.89,"n":2168,"alt_share":0.0154,"ge":{"I":0.5645,"M":0.3679,"A":0.1004}},"white":{"name":"White students","mean":1045.03,"sd":17.25,"n":32887,"alt_share":0.0091,"ge":{"I":0.665,"M":0.4359,"A":0.0983}},"female":{"name":"Female students","mean":1043.0,"sd":17.27,"n":24319,"alt_share":0.0089,"ge":{"I":0.6163,"M":0.3843,"A":0.0798}},"male":{"name":"Male students","mean":1040.47,"sd":18.94,"n":26838,"alt_share":0.0146,"ge":{"I":0.5521,"M":0.3492,"A":0.0827}}},"stats":[{"pair":"el","d":1.16,"gaps":{"I":49.0,"M":35.6,"A":8.2},"peak_cut":1035,"peak_gap":48.3,"rank_d":1,"rank_prof":1},{"pair":"hl","d":0.83,"gaps":{"I":35.6,"M":26.8,"A":6.0},"peak_cut":1036,"peak_gap":34.1,"rank_d":3,"rank_prof":3},{"pair":"black","d":0.79,"gaps":{"I":32.0,"M":27.4,"A":7.3},"peak_cut":1039,"peak_gap":30.9,"rank_d":4,"rank_prof":2},{"pair":"hisp","d":0.75,"gaps":{"I":31.6,"M":25.8,"A":6.9},"peak_cut":1038,"peak_gap":29.0,"rank_d":5,"rank_prof":4},{"pair":"frpm","d":0.6,"gaps":{"I":24.6,"M":22.0,"A":6.7},"peak_cut":1040,"peak_gap":23.7,"rank_d":6,"rank_prof":7},{"pair":"amind","d":0.59,"gaps":{"I":23.3,"M":22.2,"A":6.4},"peak_cut":1041,"peak_gap":23.1,"rank_d":7,"rank_prof":6},{"pair":"sped","d":0.84,"gaps":{"I":31.0,"M":22.6,"A":2.7},"peak_cut":1037,"peak_gap":33.0,"rank_d":2,"rank_prof":5},{"pair":"asian","d":0.08,"gaps":{"I":4.9,"M":5.4,"A":0.2},"peak_cut":1044,"peak_gap":3.0,"rank_d":10,"rank_prof":9},{"pair":"multi","d":0.2,"gaps":{"I":10.1,"M":6.8,"A":-0.2},"peak_cut":1037,"peak_gap":8.4,"rank_d":8,"rank_prof":8},{"pair":"gender","d":-0.14,"gaps":{"I":-6.4,"M":-3.5,"A":0.3},"peak_cut":1033,"peak_gap":-6.5,"rank_d":9,"rank_prof":10}]}},"pairs":[{"id":"el","focal":"el","ref":"not_el","label":"English learners and non-English learners"},{"id":"hl","focal":"hl","ref":"not_hl","label":"Students experiencing homelessness and those who are not"},{"id":"black","focal":"black","ref":"white","label":"Black and White students"},{"id":"hisp","focal":"hisp","ref":"white","label":"Hispanic or Latino and White students"},{"id":"frpm","focal":"frpm","ref":"not_frpm","label":"Students eligible and not eligible for free or reduced-price meals"},{"id":"amind","focal":"amind","ref":"white","label":"American Indian and White students"},{"id":"sped","focal":"sped","ref":"not_sped","label":"Students receiving and not receiving special education"},{"id":"asian","focal":"asian","ref":"white","label":"Asian and White students"},{"id":"multi","focal":"multi","ref":"white","label":"Students of two or more races and White students"},{"id":"gender","focal":"female","ref":"male","label":"Female and male students"}],"source":"MDE Assessment Files, Science, Public, 2025 (State)","model_mae_points":1.98,"model_max_err_points":5.85}</script>
+<script>
+(function () {
+  function init() {
+    var root = document.getElementById('gapviz');
+    if (!root) return;
+    var D = JSON.parse(document.getElementById('gv-data').textContent);
+    var NS = 'http://www.w3.org/2000/svg';
+    var LEVEL = { I: 'Intermediate', M: 'proficiency', A: 'Advanced' };
+    var C = { ref: '#2b4c6f', foc: '#d9a03c', ink: '#0f1e2e', faint: '#858d95', rule: '#dde1dd' };
+
+    function erf(x) {
+      var s = x < 0 ? -1 : 1; x = Math.abs(x);
+      var t = 1 / (1 + 0.3275911 * x);
+      var y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+      return s * y;
+    }
+    function above(g, c) { return 1 - 0.5 * (1 + erf(((c - 0.5 - g.mean) / g.sd) / Math.SQRT2)); }
+    function pdf(g, x) { var z = (x - g.mean) / g.sd; return Math.exp(-0.5 * z * z) / (g.sd * 2.5066282746); }
+    function pct(v) { return (v * 100).toFixed(1) + '%'; }
+    function mk(tag, attrs, parent, text) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (text != null) e.textContent = text;
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+    function niceStep(r) { var p = Math.pow(10, Math.floor(Math.log10(r))), n = r / p; return (n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10) * p; }
+
+    var gradeSel = document.getElementById('gv-grade'), pairSel = document.getElementById('gv-pair'),
+        slider = document.getElementById('gv-cut'), dist = document.getElementById('gv-dist'),
+        curve = document.getElementById('gv-curve');
+
+    Object.keys(D.grades).forEach(function (k) {
+      var o = document.createElement('option'); o.value = k; o.textContent = D.grades[k].label; gradeSel.appendChild(o);
+    });
+    D.pairs.forEach(function (p) {
+      var o = document.createElement('option'); o.value = p.id; o.textContent = p.label; pairSel.appendChild(o);
+    });
+
+    var st = { grade: '5', pair: 'el', cut: 550 };
+
+    function ctx() {
+      var G = D.grades[st.grade];
+      var P = D.pairs.filter(function (p) { return p.id === st.pair; })[0];
+      var S = G.stats.filter(function (s) { return s.pair === st.pair; })[0];
+      return { G: G, P: P, A: G.groups[P.focal], B: G.groups[P.ref], S: S };
+    }
+
+    function drawDist(c) {
+      var W = dist.clientWidth || 640, H = W < 520 ? 190 : 230, m = { l: 4, r: 4, t: 30, b: 28 };
+      dist.setAttribute('viewBox', '0 0 ' + W + ' ' + H); dist.setAttribute('height', H);
+      clear(dist);
+      var G = c.G, x0 = G.min, x1 = G.max;
+      var X = function (v) { return m.l + (v - x0) / (x1 - x0) * (W - m.l - m.r); };
+      var ymax = Math.max(pdf(c.A, c.A.mean), pdf(c.B, c.B.mean)) * 1.06;
+      var Y = function (v) { return H - m.b - v / ymax * (H - m.t - m.b); };
+      [['ref', c.B, 0.2], ['foc', c.A, 0.45]].forEach(function (row) {
+        var key = row[0], g = row[1], pts = [], fill = [], v;
+        for (v = x0; v <= x1; v += 0.5) {
+          var pt = X(v).toFixed(1) + ',' + Y(pdf(g, v)).toFixed(1);
+          pts.push(pt);
+          if (v >= st.cut - 0.5) fill.push(pt);
+        }
+        if (fill.length) {
+          mk('polygon', { points: X(st.cut - 0.5).toFixed(1) + ',' + Y(0) + ' ' + fill.join(' ') + ' ' + X(x1).toFixed(1) + ',' + Y(0),
+                          fill: C[key], 'fill-opacity': row[2] }, dist);
+        }
+        mk('polyline', { points: pts.join(' '), fill: 'none', stroke: C[key], 'stroke-width': 2.2, 'stroke-linejoin': 'round' }, dist);
+      });
+      mk('line', { x1: m.l, x2: W - m.r, y1: Y(0), y2: Y(0), stroke: C.rule }, dist);
+      var ticks = [x0].concat(Object.keys(G.cuts).map(function (k) { return G.cuts[k]; })).concat([x1]);
+      ticks.forEach(function (v, i) {
+        var x = (i === 0 || i === ticks.length - 1) ? X(v) : X(v - 0.5);
+        if (i > 0 && i < ticks.length - 1) mk('line', { x1: x, x2: x, y1: Y(0), y2: Y(0) + 5, stroke: C.faint }, dist);
+        mk('text', { x: x, y: H - 7, 'text-anchor': i === 0 ? 'start' : (i === ticks.length - 1 ? 'end' : 'middle'),
+                     'font-size': 11.5, fill: C.faint }, dist, v);
+      });
+      var cx = X(st.cut - 0.5);
+      mk('line', { x1: cx, x2: cx, y1: m.t - 4, y2: Y(0), stroke: C.ink, 'stroke-width': 2 }, dist);
+      mk('circle', { cx: cx, cy: m.t - 4, r: 6.5, fill: C.ink }, dist);
+      var anchor = cx < 60 ? 'start' : (cx > W - 60 ? 'end' : 'middle');
+      mk('text', { x: cx, y: m.t - 15, 'text-anchor': anchor, 'font-size': 12.5, 'font-weight': 600, fill: C.ink }, dist, 'Line at ' + st.cut);
+      dist.setAttribute('aria-label', 'Score distributions for ' + c.B.name + ' and ' + c.A.name + ', with the line at ' + st.cut + '.');
+    }
+
+    function drawCurve(c) {
+      var W = curve.clientWidth || 640, H = W < 520 ? 170 : 200, m = { l: 34, r: 8, t: 12, b: 26 };
+      curve.setAttribute('viewBox', '0 0 ' + W + ' ' + H); curve.setAttribute('height', H);
+      clear(curve);
+      var G = c.G, x0 = G.min, x1 = G.max, ys = [], v;
+      for (v = x0; v <= x1; v++) ys.push([v, (above(c.B, v) - above(c.A, v)) * 100]);
+      var obs = Object.keys(G.cuts).map(function (k) { return [G.cuts[k], c.S.gaps[k]]; });
+      var vals = ys.map(function (p) { return p[1]; }).concat(obs.map(function (p) { return p[1]; }));
+      var lo = Math.min(0, Math.min.apply(null, vals)), hi = Math.max(0, Math.max.apply(null, vals));
+      var pad = (hi - lo) * 0.12 || 1;
+      if (lo < 0) lo -= pad;
+      hi += pad;
+      var X = function (v) { return m.l + (v - x0) / (x1 - x0) * (W - m.l - m.r); };
+      var Y = function (v) { return m.t + (hi - v) / (hi - lo) * (H - m.t - m.b); };
+      var step = niceStep((hi - lo) / 4);
+      for (var t = Math.ceil(lo / step) * step; t <= hi + 1e-9; t += step) {
+        var zero = Math.abs(t) < 1e-9;
+        mk('line', { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: zero ? C.faint : C.rule }, curve);
+        mk('text', { x: m.l - 6, y: Y(t) + 4, 'text-anchor': 'end', 'font-size': 11, fill: C.faint }, curve, Math.round(t));
+      }
+      mk('polyline', { points: ys.map(function (p) { return X(p[0]).toFixed(1) + ',' + Y(p[1]).toFixed(1); }).join(' '),
+                       fill: 'none', stroke: C.ink, 'stroke-width': 2, 'stroke-linejoin': 'round' }, curve);
+      var cx = X(st.cut);
+      mk('line', { x1: cx, x2: cx, y1: m.t, y2: H - m.b, stroke: C.ink, 'stroke-dasharray': '3 4' }, curve);
+      obs.forEach(function (p) { mk('circle', { cx: X(p[0]), cy: Y(p[1]), r: 5, fill: C.foc, stroke: C.ink, 'stroke-width': 1.5 }, curve); });
+      var ticks = [x0].concat(Object.keys(G.cuts).map(function (k) { return G.cuts[k]; })).concat([x1]);
+      ticks.forEach(function (v, i) {
+        mk('text', { x: X(v), y: H - 6, 'text-anchor': i === 0 ? 'start' : (i === ticks.length - 1 ? 'end' : 'middle'),
+                     'font-size': 11, fill: C.faint }, curve, v);
+      });
+      curve.setAttribute('aria-label', 'Gap in percentage points at every possible cut score, with the gaps MDE published marked at its three cut scores.');
+    }
+
+    function readout(c) {
+      var G = c.G, lvl = null;
+      Object.keys(G.cuts).forEach(function (k) { if (G.cuts[k] === st.cut) lvl = k; });
+      var pa = lvl ? c.A.ge[lvl] : above(c.A, st.cut);
+      var pb = lvl ? c.B.ge[lvl] : above(c.B, st.cut);
+      var gap = (pb - pa) * 100;
+      document.getElementById('gv-gap').textContent = Math.abs(gap).toFixed(1);
+      var label = 'point gap at ' + st.cut + (lvl ? ', the ' + LEVEL[lvl] + ' line. Published by MDE.'
+                                               : '. Estimated from each group\u2019s average and spread.');
+      if (gap < -0.05) label += ' ' + c.A.name + ' are ahead at this line.';
+      document.getElementById('gv-gap-label').textContent = label;
+      document.getElementById('gv-ref-name').textContent = c.B.name;
+      document.getElementById('gv-foc-name').textContent = c.A.name;
+      document.getElementById('gv-ref-val').textContent = pct(pb);
+      document.getElementById('gv-foc-val').textContent = pct(pa);
+      document.getElementById('gv-d').textContent = 'Standardized difference: ' + Math.abs(c.S.d).toFixed(2) +
+        ' standard deviations. It stays the same wherever the line goes.';
+      root.querySelectorAll('.gv-presets button').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(G.cuts[b.getAttribute('data-cut')] === st.cut));
+      });
+    }
+
+    function table(c) {
+      var host = document.getElementById('gv-table');
+      if (!host) return;
+      var labels = {};
+      D.pairs.forEach(function (p) { labels[p.id] = p.label; });
+      var rows = c.G.stats.slice().sort(function (a, b) { return a.rank_d - b.rank_d; });
+      var h = '<' + 'table class="gv-table"><caption>' + c.G.label + '. Sizes only; the chart shows direction.</caption><thead><tr>' +
+              '<th scope="col">Comparison</th><th scope="col" class="num">Proficiency gap (points)</th>' +
+              '<th scope="col" class="num">Standardized difference</th><th scope="col" class="num">Rank by proficiency gap</th>' +
+              '<th scope="col" class="num">Rank by standardized difference</th></tr></thead><tbody>';
+      rows.forEach(function (s) {
+        var cls = (Math.abs(s.rank_prof - s.rank_d) >= 2 ? 'moved' : '') + (s.pair === st.pair ? ' sel' : '');
+        h += '<tr class="' + cls + '"><td><button type="button" class="gv-row" data-pair="' + s.pair + '">' + labels[s.pair] +
+             '</button></td><td class="num">' + Math.abs(s.gaps.M).toFixed(1) + '</td><td class="num">' + Math.abs(s.d).toFixed(2) +
+             '</td><td class="num">' + s.rank_prof + '</td><td class="num">' + s.rank_d + '</td></tr>';
+      });
+      host.innerHTML = h + '</tbody></' + 'table>';
+      host.querySelectorAll('.gv-row').forEach(function (b) {
+        b.addEventListener('click', function () {
+          st.pair = b.getAttribute('data-pair'); pairSel.value = st.pair; render();
+          root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    }
+
+    function render() { var c = ctx(); readout(c); drawDist(c); drawCurve(c); table(c); }
+
+    function setGrade(g) {
+      st.grade = g; var G = D.grades[g];
+      slider.min = G.min; slider.max = G.max; st.cut = G.cuts.M; slider.value = st.cut;
+      gradeSel.value = g; render();
+    }
+
+    gradeSel.addEventListener('change', function () { setGrade(gradeSel.value); });
+    pairSel.addEventListener('change', function () { st.pair = pairSel.value; render(); });
+    slider.addEventListener('input', function () { st.cut = +slider.value; render(); });
+    root.querySelectorAll('.gv-presets button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        st.cut = D.grades[st.grade].cuts[b.getAttribute('data-cut')]; slider.value = st.cut; render();
+      });
+    });
+
+    var dragging = false;
+    function fromPointer(e) {
+      var r = dist.getBoundingClientRect(), G = D.grades[st.grade];
+      var frac = (e.clientX - r.left - 4) / Math.max(1, r.width - 8);
+      var v = Math.round(G.min + frac * (G.max - G.min) + 0.5);
+      st.cut = Math.max(G.min, Math.min(G.max, v)); slider.value = st.cut; render();
+    }
+    dist.addEventListener('pointerdown', function (e) { e.preventDefault(); dragging = true; dist.setPointerCapture(e.pointerId); fromPointer(e); });
+    dist.addEventListener('pointermove', function (e) { if (dragging) fromPointer(e); });
+    dist.addEventListener('pointerup', function () { dragging = false; });
+    dist.addEventListener('pointercancel', function () { dragging = false; });
+
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+    window.addEventListener('load', render);
+    setGrade('5');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+```

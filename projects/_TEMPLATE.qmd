@@ -2,8 +2,8 @@
 title: "Short project name"
 subtitle: "One line on what it argues"
 description: "Two sentences a stranger could read cold. Lead with the finding, not the method. This text is what appears on the Projects listing page and decides whether anyone clicks."
-date: 2026-01-01
-categories: [Tableau]
+date: 2026-01-01   # Controls order on Home and Projects. Newest appears first.
+categories: [Data, Tableau]   # First category sets the feed color: Presentation (blue), Writing (slate), anything else (amber)
 ---
 
 ::: {.meta}

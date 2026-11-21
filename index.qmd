@@ -1,5 +1,16 @@
 ---
 title: "Aaron Heit"
+listing:
+  id: feed
+  contents: projects
+  type: default
+  sort: "date desc"
+  fields: [date, title, subtitle, description]
+  date-format: "MMMM YYYY"
+  categories: false
+  sort-ui: false
+  filter-ui: false
+  feed: false
 ---
 
 ::: {.masthead}
@@ -51,55 +62,7 @@ The bracket shows where the middle 80% of Minnesota elementary schools land, and
 
 ## Work
 
-::: {.project}
-::: {.spine}
-:::
-
-::: {}
-### Beyond Proficient
-
-::: {.meta}
-Science MCA-IV, spring 2025. Grades 5, 8, and high school.
-:::
-
-Minnesota reports school science performance as a percent proficient. That number turns out to be almost entirely determined by two things the state also publishes: a school's average score and how spread out its scores are. Which means proficiency rates exaggerate real differences. Two schools nine scale points apart report 17% and 43%.
-
-[See the analysis and dashboard](projects/beyond-proficient/index.qmd){.view}
-:::
-:::
-
-::: {.project}
-::: {.spine-why}
-:::
-
-::: {}
-### MnCOSE 2026
-
-::: {.meta}
-What, How, Why. Minnesota Conference on Science Education, November 2026.
-:::
-
-A classroom routine that moves students from labeled diagrams to models that explain. Students ask what they can see, how it happens underneath, and why it works, then revise one model three times across a unit. Presented to science teachers and district leaders from across Minnesota.
-
-[See the session](projects/mncose-2026/index.qmd){.view}
-:::
-:::
-
-::: {.project}
-::: {.spine-alt}
-:::
-
-::: {}
-### Minnesota Early Learning Scholarships
-
-::: {.meta}
-County-level awards across five fiscal years.
-:::
-
-Minnesota publishes scholarship awards by county but not the rate at which awarded scholarships go unused. Deriving that rate showed which counties are most exposed when a large one-time appropriation runs out.
-
-[See the analysis and dashboard](projects/early-learning/index.qmd){.view}
-:::
+::: {#feed}
 :::
 
 ## How I work
