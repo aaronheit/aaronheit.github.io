@@ -18,15 +18,15 @@ The pipeline reconciles five fiscal years of differently structured published fi
 
 The hardest part was not the extraction. An early version of the analysis summed across all five fiscal years instead of isolating a single one, which inflated every county rate and would have made the policy claim flatly wrong. Catching that is the reason the fiscal year basis is now stated on every view.
 
+::: {.column-screen-inset}
+::: {.viz-block}
 ```{=html}
-<div class="viz-wrap">
 <iframe class="viz viz-short" title="Minnesota Early Learning Scholarships dashboard" loading="lazy"
   src="https://public.tableau.com/views/MinnesotaEarlyLearningScholarshipsCountyAccessOverview/Dashboard2?:showVizHome=no&:embed=true&:toolbar=no&:device=desktop"></iframe>
-</div>
 ```
 
-::: {.viz-note}
 [Open full size on Tableau Public](https://public.tableau.com/app/profile/aaron.heit/viz/MinnesotaEarlyLearningScholarshipsCountyAccessOverview/Dashboard2)
+:::
 :::
 
 ::: {.detail}

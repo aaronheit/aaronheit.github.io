@@ -1,12 +1,15 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - "images/*"
 
 website:
   title: "Aaron Heit"
-  description: "Minnesota science assessment and education data analysis."
+  description: "Middle school science teacher in Minnesota. Education data, assessment, and science instruction."
   favicon: favicon.svg
   site-url: "https://aaronheit.github.io"
+  image: images/heit-headshot.jpg
   open-graph: true
   navbar:
     pinned: true
@@ -29,10 +32,10 @@ website:
         aria-label: Tableau Public
   page-footer:
     left: |
-      Independent analysis. Not affiliated with or endorsed by the Minnesota
-      Department of Education or the Anoka-Hennepin School District. All work
-      uses publicly available aggregate data and contains no student-level records.
-    right: "Updated September 2026"
+      Independent work. Not affiliated with or endorsed by the Minnesota
+      Department of Education or the Anoka-Hennepin School District. All data
+      work uses publicly available aggregate files and contains no student-level records.
+    right: "Updated November 2026"
 
 format:
   html:
@@ -42,12 +45,7 @@ format:
     anchor-sections: false
     link-external-newwindow: true
     link-external-icon: false
-    code-copy: true
-    code-overflow: wrap
-    highlight-style: github
     email-obfuscation: references
-    include-after-body: assets/reveal.html
 
 execute:
   enabled: false
-  echo: true

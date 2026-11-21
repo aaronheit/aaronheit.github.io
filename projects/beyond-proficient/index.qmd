@@ -44,15 +44,15 @@ The pattern is consistent and it changes with age. In fifth grade, opting out is
 
 That matters for every other number on this page, because a proficiency rate built on 78% of a school's students is not the same measurement as one built on 96%.
 
+::: {.column-screen-inset}
+::: {.viz-block}
 ```{=html}
-<div class="viz-wrap">
 <iframe class="viz viz-tall" title="Beyond Proficient dashboard" loading="lazy"
   src="https://public.tableau.com/views/BeyondProficient2025MCAdataproficienciesandopt-outs/BeyondProficient?:showVizHome=no&:embed=true&:toolbar=no&:device=desktop"></iframe>
-</div>
 ```
 
-::: {.viz-note}
 [Open full size on Tableau Public](https://public.tableau.com/app/profile/aaron.heit/viz/BeyondProficient2025MCAdataproficienciesandopt-outs/BeyondProficient)
+:::
 :::
 
 ## How it was built

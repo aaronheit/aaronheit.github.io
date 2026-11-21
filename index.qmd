@@ -3,37 +3,50 @@ title: "Aaron Heit"
 ---
 
 ::: {.masthead}
+::: {.masthead-text}
 ::: {.standfirst}
 Middle school science teacher in Minnesota. I visualize education data, and I try to be clear about what it can tell us and where it stops.
-:::
-![](images/heit.png){.portrait fig-alt="Aaron Heit"}
 :::
 
 ::: {.contact-row}
 [heit.aaron@gmail.com](mailto:heit.aaron@gmail.com) [LinkedIn](https://www.linkedin.com/in/aaron-heit-4038123b/) [Tableau Public](https://public.tableau.com/app/profile/aaron.heit) [GitHub](https://github.com/aaronheit)
 :::
+:::
+
+![](images/heit-headshot.jpg){.portrait fig-alt="Aaron Heit"}
+:::
 
 ::: {.scale}
-
 ::: {.scale-caption}
-The grade 5 Minnesota science scale runs from 501 to 599. Proficiency begins at 550. The band immediately below it is ten points wide.
+Minnesota's grade 5 science scale runs from 501 to 599. A student counts as proficient at 550.
 :::
 
 ```{=html}
-<div class="bands" role="img" aria-label="The grade 5 science scale from 501 to 599, divided into four performance bands: Beginning 501 to 539, Intermediate 540 to 549, Meets 550 to 560, and Advanced 561 to 599. The proficiency cut falls at 550.">
-  <div class="band b-beg"><span>Beginning</span></div>
-  <div class="band b-int"><span>Intermediate</span></div>
-  <div class="cut"><span>550</span></div>
-  <div class="band b-meet"><span>Meets</span></div>
-  <div class="band b-adv"><span>Advanced</span></div>
+<div class="scale-figure" role="img" aria-label="The grade 5 science scale from 501 to 599, in four performance bands: Beginning 501 to 539, Intermediate 540 to 549, Meets 550 to 560, and Advanced 561 to 599. The proficiency cut is at 550. A bracket marks the middle 80 percent of Minnesota elementary schools, whose averages fall between 532 and 546, entirely below the cut.">
+  <div class="bands">
+    <div class="band b-beg"></div>
+    <div class="band b-int"></div>
+    <div class="cut"><span>550</span></div>
+    <div class="band b-meet"></div>
+    <div class="band b-adv"></div>
+  </div>
+  <div class="spread" style="--from: 30.9%; --width: 14.45%;">
+    <div class="spread-bracket"></div>
+    <div class="spread-label">Middle 80% of schools</div>
+  </div>
+  <div class="scale-ends"><span>501</span><span>599</span></div>
+  <ul class="scale-key">
+    <li><span class="swatch k-beg" aria-hidden="true"></span>Beginning 501–539</li>
+    <li><span class="swatch k-int" aria-hidden="true"></span>Intermediate 540–549</li>
+    <li><span class="swatch k-meet" aria-hidden="true"></span>Meets 550–560</li>
+    <li><span class="swatch k-adv" aria-hidden="true"></span>Advanced 561–599</li>
+  </ul>
 </div>
-<div class="scale-ends"><span>501</span><span>599</span></div>
 ```
 
 ::: {.finding}
-A third of Minnesota fifth graders score inside that ten-point band. Nine of 833 elementary schools have an average that clears the cut at all.
+The bracket shows where the middle 80% of Minnesota elementary schools land, and all of it sits below the line. Nine of 833 schools have a fifth grade average above 550. A third of fifth graders score in the ten points just beneath it.
 :::
-
 :::
 
 ## Work
@@ -41,6 +54,7 @@ A third of Minnesota fifth graders score inside that ten-point band. Nine of 833
 ::: {.project}
 ::: {.spine}
 :::
+
 ::: {}
 ### Beyond Proficient
 
@@ -48,17 +62,33 @@ A third of Minnesota fifth graders score inside that ten-point band. Nine of 833
 Science MCA-IV, spring 2025. Grades 5, 8, and high school.
 :::
 
-Minnesota reports school science performance as a percent proficient. That number turns out to be a near-deterministic function of two things the state also publishes: a school's average scale score and its standard deviation. A model using only those two inputs predicts the reported proficiency rate at r = 0.965.
+Minnesota reports school science performance as a percent proficient. That number turns out to be almost entirely determined by two things the state also publishes: a school's average score and how spread out its scores are. Which means proficiency rates exaggerate real differences. Two schools nine scale points apart report 17% and 43%.
 
-Which means proficiency rates exaggerate real differences. Two schools nine scale points apart report 17% and 43%.
+[See the analysis and dashboard](projects/beyond-proficient/index.qmd){.view}
+:::
+:::
 
-[See the analysis and dashboard](projects/beyond-proficient/){.view}
+::: {.project}
+::: {.spine-why}
+:::
+
+::: {}
+### MnCOSE 2026
+
+::: {.meta}
+What, How, Why. Minnesota Conference on Science Education, November 2026.
+:::
+
+A classroom routine that moves students from labeled diagrams to models that explain. Students ask what they can see, how it happens underneath, and why it works, then revise one model three times across a unit. Presented to science teachers and district leaders from across Minnesota.
+
+[See the session](projects/mncose-2026/index.qmd){.view}
 :::
 :::
 
 ::: {.project}
 ::: {.spine-alt}
 :::
+
 ::: {}
 ### Minnesota Early Learning Scholarships
 
@@ -66,9 +96,9 @@ Which means proficiency rates exaggerate real differences. Two schools nine scal
 County-level awards across five fiscal years.
 :::
 
-Minnesota publishes scholarship awards by county but not the rate at which awarded scholarships go unused. Deriving that rate, and a per-county baseline index, made visible which counties are most exposed to the funding contraction that follows a large one-time appropriation.
+Minnesota publishes scholarship awards by county but not the rate at which awarded scholarships go unused. Deriving that rate showed which counties are most exposed when a large one-time appropriation runs out.
 
-[See the analysis and dashboard](projects/early-learning/){.view}
+[See the analysis and dashboard](projects/early-learning/index.qmd){.view}
 :::
 :::
 

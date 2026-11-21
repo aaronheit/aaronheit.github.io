@@ -4,14 +4,13 @@ listing:
   contents: projects
   type: default
   sort: "date desc"
-  fields: [title, subtitle, description, categories]
-  categories: numbered
+  fields: [title, subtitle, description]
+  categories: false
   sort-ui: false
   filter-ui: false
   feed: false
-page-layout: article
 ---
 
 ::: {.standfirst}
-Analyses of Minnesota public education data. All use publicly available aggregate files and contain no student-level records.
+Data analysis and classroom work. All data projects use publicly available aggregate files and contain no student-level records.
 :::

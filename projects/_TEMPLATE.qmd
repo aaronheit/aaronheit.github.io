@@ -25,15 +25,15 @@ The part that was harder than it looked, or the thing you had to correct. This
 is what separates a writeup from a screenshot, and it is usually the paragraph
 people remember.
 
+::: {.column-screen-inset}
+::: {.viz-block}
 ```{=html}
-<div class="viz-wrap">
 <iframe class="viz viz-short" title="DASHBOARD NAME" loading="lazy"
   src="https://public.tableau.com/views/WORKBOOK-NAME/SHEET-NAME?:showVizHome=no&:embed=true&:toolbar=no&:device=desktop"></iframe>
-</div>
 ```
 
-::: {.viz-note}
 [Open full size on Tableau Public](PASTE-FULL-TABLEAU-URL)
+:::
 :::
 
 ## How it was built
